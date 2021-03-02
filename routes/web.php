@@ -27,7 +27,6 @@ Route::get('membros/{item}/delete', [cadMembrosController::class, 'modal'])->nam
 Route::get('visitantes',[cadVisitantesController::class, 'index'])->name('visitantes.index');
 Route::get('visitantes.inserir', [cadVisitantesController::class, 'create'])->name('visitantes.inserir');
 Route::post('visitantes.insert', [cadVisitantesController::class, 'insert'])->name('visitantes.insert');
-Route::get('visitantes',[cadVisitantesController::class, 'index'])->name('visitantes.index');
 Route::get('visitantes/{item}/edit', [cadVisitantesController::class, 'edit'])->name('visitantes.edit');
 Route::put('visitantes/{item}', [cadVisitantesController::class, 'editar'])->name('visitantes.editar');
 Route::delete('visitantes/{item}', [cadVisitantesController::class, 'delete'])->name('visitantes.delete');

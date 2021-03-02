@@ -39,12 +39,12 @@ if(!isset($id)){
       @foreach($itens as $item)
       <?php
         $data = implode('/', array_reverse(explode('-', $item->dtcadastro)));
-        $resultatos = membro::where('id', '=', $item->id_coordenador)->first();
+        $testes = membro::where('id', '=', $item->id_coordenador)->first();
 
       ?>
          <tr>
             <td>{{$item->nome}}</td>
-            <td>{{$resultatos->mem_nome}}</td>
+            <td>{{$item->mem_nome}}</td>
             <td>{{$item->celular}}</td>
             <td>{{$data}}</td>
             <td>

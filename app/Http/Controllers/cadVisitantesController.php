@@ -87,13 +87,14 @@ class cadVisitantesController extends Controller
     }
 
     public function delete(visitante $item){
+
         $item->delete();
         return redirect()->route('visitantes.index');
      }
 
      public function modal($id){
         $item = visitante::orderby('id', 'desc')->paginate();
-        return view('painel-admin.visitante.index', ['itens' => $item, 'id' => $id]);
+        return view('painel-admin.visitantes.index', ['itens' => $item, 'id' => $id]);
 
      }
 }

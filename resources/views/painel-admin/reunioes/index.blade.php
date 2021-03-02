@@ -46,7 +46,7 @@ if(!isset($id)){
          <tr>
             <td>{{$data}}</td>
 
-            <td>{{$resultatos->qtdmembro}}</td>
+            <td>{{$item->qtdmembro}}</td>
             <td>{{$item->qtdvisitante}}</td>
             <td>{{$item->oferta}}</td>
 

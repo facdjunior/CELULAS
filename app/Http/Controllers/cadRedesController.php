@@ -11,7 +11,6 @@ class cadRedesController extends Controller
 {
     public function index(){
         $tabela = rede::orderby('id', 'desc')->paginate();
-
         return view('painel-admin.redes.index', ['itens'=> $tabela]);
     }
 
