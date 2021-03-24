@@ -8,6 +8,30 @@ use Illuminate\Http\Request;
 class cadCelulasController extends Controller
 {
     public function index(){
+
+        session_start();
+        $r=@$_SESSION['id_membro'];
+        $i=@$_SESSION['igreja'];
+        $n=@$_SESSION['nivel_usuario'];
+
+
+        switch ($n) {
+
+            case "admin":
+            $tabela = celula::where('id_igreja', '=', $i)->paginate(1500);
+            return view('painel-admin.celulas.index', ['itens'=> $tabela]);
+            break;
+        case "supervisor":
+            $tabela = celula::where('id_supervisor', '=', $r)->where('id_igreja', '=', $i)->paginate(1500);
+            return view('painel-admin.celulas.index', ['itens'=> $tabela]);
+            break;
+        case "supadmin":
+            $tabela = celula::orderby('id', 'desc')->paginate(1500);
+            return view('painel-admin.celulas.index', ['itens'=> $tabela]);
+            break;
+    }
+
+
         $tabela = celula::orderby('id', 'desc')->paginate();
         return view('painel-admin.celulas.index', ['itens'=> $tabela]);
     }

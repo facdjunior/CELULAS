@@ -19,8 +19,14 @@ class usuarioController extends Controller
             $_SESSION['id_usuario'] = $usuarios->id;
             $_SESSION['nome_usuario'] = $usuarios->usu_nome;
             $_SESSION['nivel_usuario'] = $usuarios->usu_nivel;
+            $_SESSION['igreja'] = $usuarios->id_igreja;
             $_SESSION['cpf_usuario'] = $usuarios->usu_cpf;
             $_SESSION['id_membro'] = $usuarios->id_membro;
+
+
+            if($_SESSION['nivel_usuario'] == 'supadmin'){
+                return view('painel-admin.index');
+            }
 
             if($_SESSION['nivel_usuario'] == 'admin'){
                 return view('painel-admin.index');

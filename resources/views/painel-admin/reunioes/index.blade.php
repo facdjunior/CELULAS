@@ -41,14 +41,15 @@ if(!isset($id)){
       <?php
         $data = implode('/', array_reverse(explode('-', $item->datareuniao)));
         $resultatos = reunioes::where('id', '=', $item->id_celula)->first();
-
+        setlocale(LC_MONETARY, 'pt_BR');
       ?>
          <tr>
             <td>{{$data}}</td>
 
             <td>{{$item->qtdmembro}}</td>
             <td>{{$item->qtdvisitante}}</td>
-            <td>{{$item->oferta}}</td>
+
+            <td>R$: {{number_format($item->oferta,2,',','.')}}</td>
 
             <td>
 

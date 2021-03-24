@@ -116,7 +116,7 @@
 </div>
 
 
-
+<input name="igreja" value="{{$i}}"  type="hidden">
 
 </div>
 </div>

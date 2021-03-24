@@ -3,16 +3,30 @@
 @section('content')
 <?php
 @session_start();
-if(@$_SESSION['nivel_usuario'] != 'admin'){
-  echo "<script language='javascript'> window.location='./' </script>";
+if(@$_SESSION['nivel_usuario'] == 'supadmin'){
+    if(!isset($id)){
+        $id = "";
+
+      }
+}elseif(@$_SESSION['nivel_usuario'] == 'admin'){
+    if(!isset($id)){
+        $id = "";
+
+      }
+}else {
+    echo "<script language='javascript'> window.location='./' </script>";
 }
 if(!isset($id)){
   $id = "";
 
 }
-
 ?>
 
+@if(session('mensagem'))
+    <div class="alert alert-danger">
+        <p>{{session('mensagem')}}</p>
+    </div>
+@endif
 
 <a href="{{route('membros.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Membros</a>
 

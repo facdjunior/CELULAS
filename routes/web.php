@@ -7,13 +7,24 @@ use App\Http\Controllers\cadRedesController;
 use App\Http\Controllers\cadReuniaoController;
 use App\Http\Controllers\cadVisitantesController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\IgrejaController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', homeController::class)->name('index');
+Route::get('/login', loginController::class)->name('login');
 Route::Post('painel',[usuarioController::class, 'login'])->name('usuarios.login');
 
+Route::get('igrejas',[IgrejaController::class, 'index'])->name('igrejas.index');
+Route::get('igrejas.inserir', [IgrejaController::class, 'create'])->name('igrejas.inserir');
+Route::post('igrejas.insert', [IgrejaController::class, 'insert'])->name('igrejas.insert');
+Route::get('igrejas',[IgrejaController::class, 'index'])->name('igrejas.index');
+Route::get('igrejas/{item}/edit', [IgrejaController::class, 'edit'])->name('igrejas.edit');
+Route::put('igrejas/{item}', [IgrejaController::class, 'editar'])->name('igrejas.editar');
+Route::delete('igrejas/{item}', [IgrejaController::class, 'delete'])->name('igrejas.delete');
+Route::get('igrejas/{item}/delete', [IgrejaController::class, 'modal'])->name('igrejas.modal');
 
 Route::get('membros',[cadMembrosController::class, 'index'])->name('membros.index');
 Route::get('membros.inserir', [cadMembrosController::class, 'create'])->name('membros.inserir');

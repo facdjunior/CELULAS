@@ -222,5 +222,5 @@
 </div>
 </fieldset>
 </form>
-<script src="{{URL::asset('js/validacao.js')}}"></script>?
+<script src="{{URL::asset('js/validacao.js')}}"></script>
 @endsection

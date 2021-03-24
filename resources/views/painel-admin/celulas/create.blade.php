@@ -38,7 +38,7 @@
                   <?php
 
                     use App\Models\rede;
-                  $tabela = rede::orderby('nome', 'asc')->paginate();
+                  $tabela = rede::orderby('nome', 'asc');
                   ?>
                   <option value="{{0}}">Informe Rede</option>
                   @foreach ($tabela as $tbitem)
@@ -139,7 +139,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <span class="input-group-addon">Complemento</span>
-                    <input id="complemento" name="complemento" class="form-control" placeholder="" required=""  type="text">
+                    <input id="complemento" name="complemento" class="form-control" placeholder=""  type="text">
                 </div>
             </div>
 

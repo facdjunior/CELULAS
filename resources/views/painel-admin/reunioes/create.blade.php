@@ -5,6 +5,7 @@
 <?php
 session_start();
 $r=@$_SESSION['id_membro'];
+$i=@$_SESSION['igreja'];
 
 
 ?>
@@ -100,7 +101,7 @@ $r=@$_SESSION['id_membro'];
 </div>
 </div>
 
-
+<input name="igreja" value="{{$i}}"  type="hidden">
 
 
 </div>

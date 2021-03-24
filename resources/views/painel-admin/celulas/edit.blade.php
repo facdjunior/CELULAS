@@ -146,7 +146,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <span class="input-group-addon">Complemento</span>
-                    <input id="complemento" name="complemento" value="{{$item->complemento}}" class="form-control" placeholder="" required=""  type="text">
+                    <input id="complemento" name="complemento" value="{{$item->complemento}}" class="form-control" type="text">
                 </div>
             </div>
 
@@ -213,7 +213,7 @@
               <div class="form-group">
                 <label class="input-group-addon">Supervisor<h11>*</h11></label>
                 <select name="supervisor" id="supervisor" class="custom-select">
-                <option value="{{$item->idsupervisor}}">{{$ressuper->mem_nome}}</option>
+                <option value="{{$item->id_supervisor}}">{{$ressuper->mem_nome}}</option>
                   @foreach ($tabela as $tbitem)
                   <?php if($ressuper->mem_nome != $tbitem->mem_nome){ ?>
                   <option value="{{$tbitem->id}}">{{$tbitem->mem_nome}}</option>
@@ -235,7 +235,9 @@
     <div class="col-md-6">
       <p align="right">
         <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Salvar</button>
-        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+        
+        <a class="btn btn-danger"  href="{{route('celulas.index')}}">Cancelar</a>
+        
       </p>
     </div>
   </div>

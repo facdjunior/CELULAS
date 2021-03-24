@@ -79,7 +79,7 @@ $usuario = usuario::find($id_usuario);
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
 
-                        <?php if(@$_SESSION['nivel_usuario'] == 'admin') { ?>
+                        <?php if((@$_SESSION['nivel_usuario'] == 'supervisor') or (@$_SESSION['nivel_usuario'] == 'admin')) { ?>
                             <a class="collapse-item" href="{{route('membros.index')}}">Membros</a>
                             <a class="collapse-item" href="{{route('visitantes.index')}}">Visitantes</a>
                         <?php }else if(@$_SESSION['nivel_usuario'] == 'lider'){ ?>

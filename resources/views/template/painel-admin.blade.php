@@ -77,10 +77,12 @@ $usuario = usuario::find($id_usuario);
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
 
-                        <?php if(@$_SESSION['nivel_usuario'] == 'admin') { ?>
+                        <?php if($_SESSION['nivel_usuario'] == 'admin' || $_SESSION['nivel_usuario'] == 'supadmin' ) { ?>
+                            <a class="collapse-item" href="{{route('igrejas.index')}}">Igrejas</a>
                             <a class="collapse-item" href="{{route('membros.index')}}">Membros</a>
                             <a class="collapse-item" href="{{route('visitantes.index')}}">Visitantes</a>
-                        <?php }else if(@$_SESSION['nivel_usuario'] == 'lider'){ ?>
+                        <?php }
+                            else if(@$_SESSION['nivel_usuario'] == 'supervisor'){ ?>
                             <a class="collapse-item" href="{{route('visitantes.index')}}">Visitantes</a>
                         <?php
                         }
@@ -100,13 +102,16 @@ $usuario = usuario::find($id_usuario);
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
 
-                        <?php if(@$_SESSION['nivel_usuario'] == 'admin') { ?>
+                        <?php if($_SESSION['nivel_usuario'] == 'admin' || $_SESSION['nivel_usuario'] == 'supadmin' ) { ?>
                             <a class="collapse-item" href="{{route('redes.index')}}">Redes</a>
                             <a class="collapse-item" href="{{route('celulas.index')}}">Células</a>
                             <a class="collapse-item" href="{{route('reunioes.index')}}">Reunião</a>
                             <a class="collapse-item" href="">Batismos</a>
+                            <a class="collapse-item" href="{{route('usuarios.index')}}">Usuários</a>
+
                         <?php }else if(@$_SESSION['nivel_usuario'] == 'lider'){ ?>
                             <a class="collapse-item" href="{{route('reunioes.index')}}">Reunião</a>
+                            <a class="collapse-item" href="{{route('celulas.index')}}">Células</a>
                         <?php
                         }
                         ?>

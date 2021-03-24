@@ -4,7 +4,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\visitante;
-use App\Models\usuario;
 use Illuminate\Http\Request;
 
 class cadVisitantesController extends Controller

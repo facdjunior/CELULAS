@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\membro;
 use App\Models\usuario;
+use App\Models\celula;
 use Illuminate\Http\Request;
 
 class cadMembrosController extends Controller
 {
     public function index(){
 
-        $tabela = membro::orderby('id', 'desc')->paginate();
+        session_start();
+        $r=@$_SESSION['id_membro'];
+        $i=@$_SESSION['igreja'];
+        $n=@$_SESSION['nivel_usuario'];
+
+
+        switch ($n) {
+
+            case "supadmin":
+                $tabela = membro::orderby('id', 'desc')->paginate();
+                return view('painel-admin.membros.index', ['itens'=> $tabela]);
+            break;
+        }
+        $tabela = membro::where('id_igreja', '=', $i)->paginate(1500);
         return view('painel-admin.membros.index', ['itens'=> $tabela]);
     }
 
@@ -19,6 +33,8 @@ class cadMembrosController extends Controller
     }
 
     public function insert(Request $request){
+        session_start();
+        $i=@$_SESSION['igreja'];
 
         $tabela = new membro();
         $tabela->mem_nome = $request->nome;
@@ -36,6 +52,7 @@ class cadMembrosController extends Controller
         $tabela->mem_fone = $request->fone;
         $tabela->mem_complemento = $request->complemento;
         $tabela->sexo = $request->sexo;
+        $tabela->id_igreja = $i;
 
         $itens = membro::where('mem_cpf', '=', $request->cpf)->orwhere('email', '=', '$email')->count();
         if($itens > 0){
@@ -98,8 +115,20 @@ class cadMembrosController extends Controller
     }
 
     public function delete(membro $item){
-        $item->delete();
-        return redirect()->route('membros.index');
+
+        $itens = celula::where('id_lider', '=', $item)->count();
+
+        if($itens > 0){
+
+            $item->delete();
+            return redirect()->route('membros.index');
+        }
+
+        return redirect()->route('membros.index')->with('mensagem', 'Não é possível Deletar Registro o mesmo está vinculado como líder de Célula!');
+
+        //Request::session()->flash('status', 'Não é possível Deletar Registro o mesmo está vinculado como líder de Célula!');
+
+
      }
 
      public function modal($id){

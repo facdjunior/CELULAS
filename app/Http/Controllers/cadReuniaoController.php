@@ -8,8 +8,28 @@ use Illuminate\Http\Request;
 class cadReuniaoController extends Controller
 {
     public function index(){
+
+session_start();
+$r=@$_SESSION['id_membro'];
+$i=@$_SESSION['igreja'];
+$n=@$_SESSION['nivel_usuario'];
+
+
+switch ($n) {
+    case "admin":
+        $tabela = reunioes::where('id_igreja', '=', $i)->paginate();
+        return view('painel-admin.reunioes.index', ['itens'=> $tabela]);
+        break;
+    case "lider":
+        $tabela = reunioes::join('celulas', 'reunioes.id_celula', '=', 'celulas.id')->where('celulas.id_lider', $r)->where('celulas.id_igreja', $i)->get();
+        return view('painel-admin.reunioes.index', ['itens'=> $tabela]);
+        break;
+    case "supadmin":
         $tabela = reunioes::orderby('id', 'desc')->paginate();
         return view('painel-admin.reunioes.index', ['itens'=> $tabela]);
+        break;
+}
+
     }
 
     public function create(){
@@ -18,13 +38,16 @@ class cadReuniaoController extends Controller
 
     public function insert(Request $request){
 
+
         $tabela = new reunioes();
+
         $tabela->id_celula = $request->celula;
         $tabela->oferta = $request->oferta;
         $tabela->qtdmembro = $request->qtdmembro;
         $tabela->qtdvisitante = $request->qtdvisitante;
         $tabela->qtdtotal = $request->totaldia;
         $tabela->datareuniao = $request->datareuniao;
+        $tabela->id_igreja = $request->igreja;
 
         $itens = reunioes::where('datareuniao', '=', $request->datareuniao)->where('id_celula', '=', $request->celula)->count();
         if($itens > 0){
